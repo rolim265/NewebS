@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27-Jan-2025 às 01:31
+-- Tempo de geração: 27-Jan-2025 às 22:25
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -72,9 +72,18 @@ CREATE TABLE `posts` (
   `user_id` int(11) NOT NULL,
   `content` text NOT NULL,
   `media` varchar(255) DEFAULT NULL,
-  `privacy` enum('followers','public','anonymous') NOT NULL DEFAULT 'public',
+  `privacy` enum('followers','public','anonymous_followers') NOT NULL DEFAULT 'anonymous_followers',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `posts`
+--
+
+INSERT INTO `posts` (`id`, `user_id`, `content`, `media`, `privacy`, `created_at`) VALUES
+(15, 6, 'teste01_global', '6797ef04071dc_Captura de tela 2025-01-27 173838.png', 'public', '2025-01-27 20:39:32'),
+(16, 6, 'teste02_anonimo', '6797ef317dd78_Captura de tela 2025-01-27 173857.png', 'anonymous_followers', '2025-01-27 20:40:17'),
+(17, 6, 'teste03_seguidores', '6797ef5657c22_Captura de tela 2025-01-27 173846.png', 'followers', '2025-01-27 20:40:54');
 
 -- --------------------------------------------------------
 
@@ -105,6 +114,14 @@ CREATE TABLE `users` (
   `profile_picture` varchar(255) DEFAULT 'default.jpg',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `users`
+--
+
+INSERT INTO `users` (`id`, `NAME`, `email`, `PASSWORD`, `bio`, `profile_picture`, `created_at`) VALUES
+(5, 'Gabriel Rodrigues Rolim', 'gabrielrodriguesrolim@gmail.com', '$2y$10$LcpCzIMs6c1TpPGXrI6hC.k6jWjw6vUMJh0tTe6SpwJQOiU2DfQA.', '', 'eu2.jpg', '2025-01-27 17:39:09'),
+(6, 'Rosângela Rodrigues Rolim ', 'rolim8096@gmail.com', '$2y$10$hS4s8i6y1eGcVx4csPG/q.i6whPt9VoJi9IFimugV6LTSGSj0j9aO', '', 'eu1.jpg', '2025-01-27 17:44:47');
 
 --
 -- Índices para tabelas despejadas
@@ -182,7 +199,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `reports`
@@ -194,7 +211,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restrições para despejos de tabelas
